@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 180a8ff2b03fcb54c94bcc6948d37d76, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  maxWheatHeight: 5
-  highlightWidth: 0.2
-  highlightGlowRate: 2.3
+  _maxWheatHeight: 5
+  _highlightWidth: 0.2
+  _highlightGlowRate: 2.3
+  _wheatScalar: 10

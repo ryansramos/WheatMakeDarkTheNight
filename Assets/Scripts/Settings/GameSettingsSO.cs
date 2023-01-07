@@ -6,11 +6,18 @@ using UnityEngine;
 public class GameSettingsSO : ScriptableObject
 {
     [SerializeField]
-    public float maxWheatHeight;
+    private float _maxWheatHeight;
+    public float maxWheatHeight => _maxWheatHeight;
 
     [SerializeField]
-    public float highlightWidth;
+    private float _highlightWidth;
+    public float highlightWidth => _highlightWidth;
 
     [SerializeField]
-    public float highlightGlowRate;
+    private float _highlightGlowRate;
+    public float highlightGlowRate => _highlightGlowRate;
+
+    [SerializeField]
+    private float _wheatScalar;
+    public float wheatScalar => _wheatScalar;
 }
