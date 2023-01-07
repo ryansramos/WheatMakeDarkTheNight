@@ -7,6 +7,11 @@ public class WheatManager : MonoBehaviour
     [SerializeField]
     private WheatStalk[] _stalks;
     private WheatStalk _activeStalk = default;
+    [SerializeField]
+    private WheatMeter _meter;
+
+    [SerializeField]
+    private VoidEventChannelSO _onWheatCutEvent;
 
     void Start()
     {
@@ -14,6 +19,7 @@ public class WheatManager : MonoBehaviour
         {
             stalk.RequestSetActive.AddListener(OnRequestSetActive);
             stalk.RequestDeactivate.AddListener(OnRequestDeactivate);
+            stalk.OnWheatCut.AddListener(OnWheatCut);
         }
         Reset();
     }
@@ -24,6 +30,7 @@ public class WheatManager : MonoBehaviour
         {
             stalk.OnReset();
         }
+        _meter.Reset();
     }
 
     void OnRequestSetActive(WheatStalk stalk)
@@ -43,5 +50,11 @@ public class WheatManager : MonoBehaviour
             _activeStalk = null;
         }
         stalk.SetActive(false);
+    }
+
+    void OnWheatCut(float amount)
+    {
+        _onWheatCutEvent.RaiseEvent();
+        _meter.Add(amount);
     }
 }

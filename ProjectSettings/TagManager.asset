@@ -47,6 +47,9 @@ TagManager:
   - name: Reticle
     uniqueID: 1224714249
     locked: 0
-  - name: WheatButton
+  - name: MeterFill
     uniqueID: 1656827891
+    locked: 0
+  - name: MeterMask
+    uniqueID: 1464973503
     locked: 0
