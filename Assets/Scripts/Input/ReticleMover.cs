@@ -6,6 +6,11 @@ public class ReticleMover : MonoBehaviour
 {
     [SerializeField]
     private InputReader _input;
+
+    [Header("Broadcasting on: ")]
+    [SerializeField]
+    private Vector3EventChannel _onClickEvent;
+
     private Transform _transform;
     private Vector2 _aimPosition = new Vector2();
 
@@ -17,11 +22,13 @@ public class ReticleMover : MonoBehaviour
     void OnEnable()
     {
         _input.OnAimEvent += OnAim;
+        _input.OnPrimaryEvent += OnClick;
     }
 
     void OnDisable()
     {
         _input.OnAimEvent -= OnAim;
+        _input.OnPrimaryEvent -= OnClick;
     }
 
     void OnAim(Vector2 input)
@@ -32,6 +39,12 @@ public class ReticleMover : MonoBehaviour
         float inputX = Mathf.Clamp(adjustedX, 0f, 1f);
         float inputY = Mathf.Clamp(adjustedY, 0f, 1f);
         _aimPosition = new Vector2(inputX, inputY);
+    }
+
+    void OnClick()
+    {
+        Vector3 position = GetWorldPosition();
+        _onClickEvent.RaiseEvent(position);
     }
 
     bool IsInsideViewport(float x, float y)
@@ -52,5 +65,13 @@ public class ReticleMover : MonoBehaviour
     public Vector2 GetAimPosition()
     {
         return _aimPosition;
+    }
+
+    public Vector3 GetWorldPosition()
+    {
+        Vector3 position = new Vector3(_aimPosition.x, _aimPosition.y, 0f);
+        position = Camera.main.ViewportToWorldPoint(position);
+        position = new Vector3(position.x, position.y, 0f);
+        return position;
     }
 }

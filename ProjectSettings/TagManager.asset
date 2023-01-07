@@ -41,6 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Wheat
+    uniqueID: 3320017251
+    locked: 0
   - name: Reticle
     uniqueID: 1224714249
+    locked: 0
+  - name: WheatButton
+    uniqueID: 1656827891
     locked: 0
