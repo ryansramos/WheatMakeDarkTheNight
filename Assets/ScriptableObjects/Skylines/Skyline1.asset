@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f98e17d8520f07144ac8111855c8f221, type: 3}
+  m_Name: Skyline1
+  m_EditorClassIdentifier: 
+  _settings: {fileID: 11400000, guid: 57a44a54fe9515a4592748b0563ca01a, type: 2}
+  _sprite: {fileID: 21300000, guid: 8646c552209126a4c9eafa22cdb950d6, type: 3}
+  _heightArray: 280000001a00000031000000090000001b00000024000000240000001c0000003d000000
