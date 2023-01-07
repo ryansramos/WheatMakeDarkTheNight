@@ -20,4 +20,8 @@ public class GameSettingsSO : ScriptableObject
     [SerializeField]
     private float _wheatScalar;
     public float wheatScalar => _wheatScalar;
+
+    [SerializeField]
+    private float _maxWheat;
+    public float maxWheat => _maxWheat;
 }

@@ -13,12 +13,9 @@ public class WheatStalk : MonoBehaviour
     [SerializeField]
     private Vector3EventChannel _onClickEvent;
 
-    [Header("Broadcasting on: ")]
-    [SerializeField]
-    private VoidEventChannelSO _onWheatCutEvent;
-
     public UnityEvent<WheatStalk> RequestSetActive;
     public UnityEvent<WheatStalk> RequestDeactivate;
+    public UnityEvent<float> OnWheatCut;
 
     private Bounds _bounds;
     private Transform _transform;
@@ -77,9 +74,9 @@ public class WheatStalk : MonoBehaviour
         {
             if (CheckCursorHeight(position.y, out float yPosition))
             {
+                OnWheatCut?.Invoke((_currentHeight - yPosition) / _settings.maxWheatHeight);
                 _currentHeight = yPosition;
                 UpdateSprite(yPosition);
-                _onWheatCutEvent.RaiseEvent();
             }
         }
     }
