@@ -38,6 +38,7 @@ public class FeedbackUI : MonoBehaviour
     public void PlayFeedbackText(float percent)
     {
         _feedbackText.gameObject.SetActive(true);
+        Debug.Log(percent);
         if (percent > _settings.blockTier1)
         {
             SetFeedbackText(0);
@@ -54,7 +55,7 @@ public class FeedbackUI : MonoBehaviour
         {
             SetFeedbackText(3);
         }
-        else if (percent > _settings.blockTier4)
+        else
         {
             SetFeedbackText(4);
         }

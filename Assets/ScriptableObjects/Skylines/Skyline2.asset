@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f98e17d8520f07144ac8111855c8f221, type: 3}
-  m_Name: Skyline1
+  m_Name: Skyline2
   m_EditorClassIdentifier: 
   _settings: {fileID: 11400000, guid: 57a44a54fe9515a4592748b0563ca01a, type: 2}
-  _sprite: {fileID: 21300000, guid: 8646c552209126a4c9eafa22cdb950d6, type: 3}
-  _percentShadedArea: 0.41
+  _sprite: {fileID: 21300000, guid: 7ba819af7f6777a499cab2e1f4fc5dc9, type: 3}
+  _percentShadedArea: 0.558

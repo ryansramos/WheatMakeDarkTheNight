@@ -15,6 +15,7 @@ public class ScreenFader : MonoBehaviour
     [NonSerialized]
     public bool IsComplete;
 
+    // Fade In Fade out is backwards, but whatever
     public void FadeIn()
     {
         StartCoroutine(FadeScreen(0f));

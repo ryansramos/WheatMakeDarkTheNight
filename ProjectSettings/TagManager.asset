@@ -44,6 +44,12 @@ TagManager:
   - name: Wheat
     uniqueID: 3320017251
     locked: 0
+  - name: NightScreen
+    uniqueID: 2001521217
+    locked: 0
+  - name: TextPopup
+    uniqueID: 3232561247
+    locked: 0
   - name: MeterFill
     uniqueID: 1656827891
     locked: 0
@@ -53,6 +59,6 @@ TagManager:
   - name: Reticle
     uniqueID: 1224714249
     locked: 0
-  - name: TextPopup
-    uniqueID: 3232561247
+  - name: DayCard
+    uniqueID: 1006474983
     locked: 0

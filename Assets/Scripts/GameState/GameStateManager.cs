@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameStateManager : MonoBehaviour
 {
@@ -27,6 +28,15 @@ public class GameStateManager : MonoBehaviour
     private float _proceedLag;
 
     [SerializeField]
+    private NightScreen _nightScreen;
+
+    [SerializeField]
+    private SpriteRenderer _nightLight;
+
+    [SerializeField]
+    private float _nightScreenFadeInTime;
+
+    [SerializeField]
     private float _refundStaminaLag;
 
     [SerializeField]
@@ -36,24 +46,47 @@ public class GameStateManager : MonoBehaviour
     private float _feedbackDisplayTime;
 
     [SerializeField]
+    private float _lightTurnOnLag;
+
+    [SerializeField]
+    private ScreenFader _dayCard;
+
+    [SerializeField]
+    private float _dayCardFadeInTime;
+
+    [SerializeField]
+    private TextMeshProUGUI _dayText;
+
+    [SerializeField]
+    private float _dayTextDelay;
+
+    [SerializeField]
+    private float _dayTextHold;
+
+    [SerializeField]
+    private float _dayCardFadeOutTime;
+
+    [SerializeField]
     private Button _finishButton;
 
     private IEnumerator _coroutine;
-    // private int _day = 0;
+    private int _day = 0;
     
     private bool _isWaitingToProceed;
 
     void Start()
     {
-        ResetGame();
+       ResetGame();
     }
 
     public void ResetGame()
     {
+        _day = 0;
         _mover.Initialize(_wheat, _skyline);
         _wheat.GameReset();
         _stamina.OnGameReset();
-        NextDay(0);
+        _dayCard.gameObject.SetActive(true);
+        StartCoroutine(GameStart());
     }
 
     public void OnProceed()
@@ -109,6 +142,13 @@ public class GameStateManager : MonoBehaviour
         _feedback.StopFeedbackText();
     }
 
+    void SetNightLightColor(float coverage)
+    {
+        float exposure = 1 - coverage;
+        exposure = Mathf.Clamp(exposure, 0f, 1f);
+        float alpha = .7f * exposure + .05f;
+        _nightLight.color = new Color(1f, 1f, 1f, alpha);
+    }
 
     void RefundStamina(float coverage)
     {
@@ -120,6 +160,24 @@ public class GameStateManager : MonoBehaviour
     {
         _wheat.Resume();
         _finishButton.gameObject.SetActive(true);
+    }
+
+    IEnumerator GameStart()
+    {
+        PauseGameplay();
+        NextDay(_day);
+        yield return new WaitForSeconds(_dayTextDelay);
+        _dayText.gameObject.SetActive(true);
+        _dayText.text = "Night " + (_day + 1).ToString();
+        yield return new WaitForSeconds(_dayTextHold);
+        _dayText.gameObject.SetActive(false);
+        _dayCard.FadeIn();
+        while (!_dayCard.IsComplete)
+        {
+            yield return null;
+        }
+        _dayCard.gameObject.SetActive(false);
+        ResumeGameplay();
     }
 
     IEnumerator ComparisonRoutine()
@@ -139,17 +197,47 @@ public class GameStateManager : MonoBehaviour
         PlayCoverageText(coverage);
         yield return new WaitForSeconds(_feedbackLag);
         StopCoverageText();
+
+        _nightScreen.gameObject.SetActive(true);
+        _nightScreen.TurnOn(_nightScreenFadeInTime);
+        while (!_nightScreen.isCompleted)
+        {
+            yield return null;
+        }
+        yield return new WaitForSeconds(_lightTurnOnLag);
+        _nightLight.gameObject.SetActive(true);
+        SetNightLightColor(coverage);
+
         PlayCoverageFeedback(coverage);
         yield return new WaitForSeconds(_refundStaminaLag);
         RefundStamina(coverage);
         yield return new WaitForSeconds(_feedbackDisplayTime);
         StopCoverageFeedback();
-        _mover.MoveToGameplayPosition();
-        while (_mover.isMoving)
+
+        // remember, fader is swapped fade in/fade out bc i stupid
+        _dayCard.gameObject.SetActive(true);
+        _dayCard.FadeOut();
+        while (!_dayCard.IsComplete)
         {
             yield return null;
         }
-        NextDay(0);
+        _nightScreen.TurnOff();
+        _nightLight.gameObject.SetActive(false);
+        _nightScreen.gameObject.SetActive(false);
+        _day++;
+        NextDay(_day);
+        yield return new WaitForSeconds(_dayTextDelay);
+        _dayText.gameObject.SetActive(true);
+        _dayText.text = "Night " + (_day + 1).ToString();
+        _mover.MoveToGameplayPosition();
+        yield return new WaitForSeconds(_dayTextHold);
+        _dayText.gameObject.SetActive(false);
+        _dayCard.FadeIn();
+        while (!_dayCard.IsComplete && _mover.isMoving)
+        {
+            yield return null;
+        }
+        _dayCard.gameObject.SetActive(false);
         ResumeGameplay();
     }  
 }
