@@ -95,6 +95,15 @@ public class GameStateManager : MonoBehaviour
     [SerializeField]
     private Button _resetButton;
 
+    [SerializeField]
+    private float _gameOverFeedbackTextDelay;
+
+    [SerializeField]
+    private TextMeshProUGUI _gameOverFeedbackText;
+
+    [SerializeField]
+    private TextBlock[] _gameOverFeedbackMessage;
+
     void Start()
     {
        ResetGame();
@@ -103,6 +112,7 @@ public class GameStateManager : MonoBehaviour
     public void ResetGame()
     {
         _gameOverText.gameObject.SetActive(false);
+        _gameOverFeedbackText.gameObject.SetActive(false);
         _resetButton.gameObject.SetActive(false);
         _nightLight.gameObject.SetActive(false);
         _nightScreen.gameObject.SetActive(false);
@@ -305,5 +315,19 @@ public class GameStateManager : MonoBehaviour
         yield return new WaitForSeconds(_gameOverTextDelay);
         _gameOverText.gameObject.SetActive(true);
         _resetButton.gameObject.SetActive(true);
+        float current = _wheatMeter.currentWheat;
+        float expected = _target.targetWheat;
+        float differential = current - expected;
+
+        yield return new WaitForSeconds(_gameOverFeedbackTextDelay);
+        _gameOverFeedbackText.gameObject.SetActive(true);
+        if (differential >= 0)
+        {
+            _gameOverFeedbackText.text = _gameOverFeedbackMessage[0].text;
+        }
+        else
+        {
+            _gameOverFeedbackText.text = _gameOverFeedbackMessage[1].text;
+        }
     }
 }
