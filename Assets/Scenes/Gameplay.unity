@@ -4067,6 +4067,7 @@ MonoBehaviour:
 
       The farmer suspects
       this is the least of his worries.'
+  _startDay: 0
 --- !u!4 &1788337223
 Transform:
   m_ObjectHideFlags: 0

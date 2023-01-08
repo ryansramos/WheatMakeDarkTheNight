@@ -41,6 +41,7 @@ public class WheatStalk : MonoBehaviour
         _renderer.sortingOrder = 1;
         _highlight.Reset();
         UpdateSprite(_currentHeight);
+        CalculateBounds();
     }
 
     public void SetActive(bool status)
