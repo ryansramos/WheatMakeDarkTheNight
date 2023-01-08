@@ -22,6 +22,9 @@ public class WheatStalk : MonoBehaviour
     private SpriteRenderer _renderer;
     private WheatHighlight _highlight;
     private float _currentHeight;
+    public float currentHeight => _currentHeight;
+
+    private bool _isPaused;
 
     void Awake()
     {
@@ -47,6 +50,7 @@ public class WheatStalk : MonoBehaviour
 
     public void OnReset()
     {
+        _isPaused = false;
         _currentHeight = _settings.maxWheatHeight;
         _renderer.sortingOrder = 1;
         _highlight.Reset();
@@ -67,9 +71,21 @@ public class WheatStalk : MonoBehaviour
             _highlight.TurnOff();
         }
     }
+    public void Pause()
+    {
+        _isPaused = true;
+    }
 
+    public void Resume()
+    {
+        _isPaused = false;
+    }
     public void OnClick(Vector3 position)
     {
+        if (_isPaused)
+        {
+            return;
+        }
         if (_bounds.Contains(position))
         {
             if (CheckCursorHeight(position.y, out float yPosition))
@@ -107,6 +123,10 @@ public class WheatStalk : MonoBehaviour
     
     void OnHover(Vector3 position)
     {
+        if (_isPaused)
+        {
+            return;
+        }
         if (CheckCursorHeight(position.y, out float y))
         {
             RequestSetActive?.Invoke(this);
@@ -119,6 +139,10 @@ public class WheatStalk : MonoBehaviour
 
     void OnHoverRelease()
     {
+        if (_isPaused)
+        {
+            return;
+        }
         RequestDeactivate?.Invoke(this);
     }
 

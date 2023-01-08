@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settings: {fileID: 11400000, guid: 57a44a54fe9515a4592748b0563ca01a, type: 2}
   _sprite: {fileID: 21300000, guid: 8646c552209126a4c9eafa22cdb950d6, type: 3}
-  _heightArray: 280000001a00000031000000090000001b00000024000000240000001c0000003d000000
+  _percentShadedArea: 0.558

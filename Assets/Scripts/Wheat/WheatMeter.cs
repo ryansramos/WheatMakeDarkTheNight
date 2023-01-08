@@ -26,7 +26,7 @@ public class WheatMeter : MonoBehaviour
 
     public void Add(float amount)
     {
-        float wheatAmount = amount * _settings.wheatScalar;
+        float wheatAmount = amount * _settings.wheatTotal / 9;
         float wheatRatio = wheatAmount / _settings.maxWheat;
         Vector3 newPosition = _maskTransform.localPosition + wheatRatio * _maskMaxPosition * Vector3.right;
         _maskTransform.localPosition = newPosition;
