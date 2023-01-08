@@ -86,6 +86,14 @@ public class GameStateManager : MonoBehaviour
     [SerializeField]
     public WheatTarget _target;
 
+    [SerializeField]
+    public TextMeshProUGUI _gameOverText;
+
+    [SerializeField]
+    private float _gameOverTextDelay;
+
+    [SerializeField]
+    private Button _resetButton;
 
     void Start()
     {
@@ -94,6 +102,11 @@ public class GameStateManager : MonoBehaviour
 
     public void ResetGame()
     {
+        _gameOverText.gameObject.SetActive(false);
+        _resetButton.gameObject.SetActive(false);
+        _nightLight.gameObject.SetActive(false);
+        _nightScreen.gameObject.SetActive(false);
+        _day++;
         _day = 0;
         _mover.Initialize(_wheat, _skyline);
         _wheat.GameReset();
@@ -242,6 +255,12 @@ public class GameStateManager : MonoBehaviour
         SetNightLightColor(coverage);
 
         PlayCoverageFeedback(coverage);
+
+        if (_day == 6)
+        {
+            StartCoroutine(GameOver());
+            yield break;
+        }
         yield return new WaitForSeconds(_refundStaminaLag);
         RefundStamina(coverage);
         yield return new WaitForSeconds(_feedbackDisplayTime);
@@ -277,5 +296,14 @@ public class GameStateManager : MonoBehaviour
         }
         _dayCard.gameObject.SetActive(false);
         ResumeGameplay();
-    }  
+    }
+
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(_feedbackDisplayTime);
+        StopCoverageFeedback();
+        yield return new WaitForSeconds(_gameOverTextDelay);
+        _gameOverText.gameObject.SetActive(true);
+        _resetButton.gameObject.SetActive(true);
+    }
 }
