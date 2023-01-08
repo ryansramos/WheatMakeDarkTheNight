@@ -17,7 +17,15 @@ MonoBehaviour:
   _highlightGlowRate: 2.3
   _wheatTotal: 90
   _maxWheat: 315
-  _maxStamina: 14
+  _maxStamina: 35
   _staminaPerHit: 1
-  _maxStaminaRefund: 9
-  _refundThreshold: 0.5
+  _blockTier1: 0.9
+  _blockTier2: 0.8
+  _blockTier3: 0.75
+  _blockTier4: 0.5
+  _blockTier5: 0
+  _refundTier1: 5
+  _refundTier2: 3
+  _refundTier3: 0
+  _refundTier4: -3
+  _refundTier5: -5

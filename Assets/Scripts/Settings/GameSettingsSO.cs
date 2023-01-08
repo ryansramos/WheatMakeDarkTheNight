@@ -26,18 +26,61 @@ public class GameSettingsSO : ScriptableObject
     public float maxWheat => _maxWheat;
 
     [SerializeField]
-    private float _maxStamina;
-    public float maxStamina => _maxStamina;
+    private int _maxStamina;
+    public int maxStamina => _maxStamina;
 
     [SerializeField]
-    private float _staminaPerHit;
-    public float staminaPerHit => _staminaPerHit;
+    private int _staminaPerHit;
+    public int staminaPerHit => _staminaPerHit;
 
-    [SerializeField]
-    private float _maxStaminaRefund;
-    public float maxStaminaRefund => _maxStaminaRefund;
 
+    [Header("Thresholds")]
+    [Range(0f, 1f)]
     [SerializeField]
-    private float _refundThreshold;
-    public float refundThreshold => _refundThreshold;
+    private float _blockTier1;
+    public float blockTier1 => _blockTier1;
+
+    [Range(0f, 1f)]
+    [SerializeField]
+    private float _blockTier2;
+    public float blockTier2 => _blockTier2;
+
+    [Range(0f, 1f)]
+    [SerializeField]
+    private float _blockTier3;
+    public float blockTier3 => _blockTier3;
+
+    
+    [Range(0f, 1f)]
+    [SerializeField]
+    private float _blockTier4;
+    public float blockTier4 => _blockTier4;
+
+    
+    [Range(0f, 1f)]
+    [SerializeField]
+    private float _blockTier5;
+    public float blockTier5 => _blockTier5;
+
+    [Header("Refunds")]
+    [SerializeField]
+    [Range(-10, 10)]
+    private int _refundTier1;
+    public int refundTier1 => _refundTier1;
+    [SerializeField]
+    [Range(-10, 10)]
+    private int _refundTier2;
+    public int refundTier2 => _refundTier2;
+    [SerializeField]
+    [Range(-10, 10)]
+    private int _refundTier3;
+    public int refundTier3 => _refundTier3;
+    [SerializeField]
+    [Range(-10, 10)]
+    private int _refundTier4;
+    public int refundTier4 => _refundTier4;
+    [SerializeField]
+    [Range(-10, 10)]
+    private int _refundTier5;
+    public int refundTier5 => _refundTier5;
 }
