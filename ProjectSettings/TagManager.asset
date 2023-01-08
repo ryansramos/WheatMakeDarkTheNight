@@ -53,3 +53,6 @@ TagManager:
   - name: Reticle
     uniqueID: 1224714249
     locked: 0
+  - name: TextPopup
+    uniqueID: 3232561247
+    locked: 0

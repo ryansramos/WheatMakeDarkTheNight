@@ -21,7 +21,19 @@ public class GameStateManager : MonoBehaviour
     private StaminaManager _stamina;
 
     [SerializeField]
+    private FeedbackUI _feedback;
+
+    [SerializeField]
     private float _proceedLag;
+
+    [SerializeField]
+    private float _refundStaminaLag;
+
+    [SerializeField]
+    private float _feedbackLag;
+
+    [SerializeField]
+    private float _feedbackDisplayTime;
 
     [SerializeField]
     private Button _finishButton;
@@ -71,15 +83,35 @@ public class GameStateManager : MonoBehaviour
         _skyline.LoadSkyline(day);
     }
 
-    void CalculateExposure(float percent)
+    float CalculateCoverage(float percent)
     {
         float exposure = percent / _skyline.activeSkyline.percentShadedArea;
-        RefundStamina(exposure);
+        return 1 - exposure;
     }
 
-    void RefundStamina(float exposure)
+    void PlayCoverageText(float coverage)
     {
-        float coverage = 1 - exposure;
+        _feedback.PlayText(coverage);
+    }
+
+    void StopCoverageText()
+    {
+        _feedback.StopText();
+    }
+
+    void PlayCoverageFeedback(float coverage)
+    {
+        _feedback.PlayFeedbackText(coverage);
+    }
+
+    void StopCoverageFeedback()
+    {
+        _feedback.StopFeedbackText();
+    }
+
+
+    void RefundStamina(float coverage)
+    {
         coverage = Mathf.Clamp(coverage, 0f, 1f);
         _stamina.RefundStamina(coverage);
     }
@@ -102,8 +134,16 @@ public class GameStateManager : MonoBehaviour
         {
             yield return null;
         }
-        CalculateExposure(_reader.shadedPercent);
+        float coverage = CalculateCoverage(_reader.shadedPercent);
         yield return new WaitForSeconds(_proceedLag);
+        PlayCoverageText(coverage);
+        yield return new WaitForSeconds(_feedbackLag);
+        StopCoverageText();
+        PlayCoverageFeedback(coverage);
+        yield return new WaitForSeconds(_refundStaminaLag);
+        RefundStamina(coverage);
+        yield return new WaitForSeconds(_feedbackDisplayTime);
+        StopCoverageFeedback();
         _mover.MoveToGameplayPosition();
         while (_mover.isMoving)
         {
