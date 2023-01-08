@@ -16,6 +16,10 @@ public class GameStateManager : MonoBehaviour
 
     [SerializeField]
     private TextureReader _reader;
+
+    [SerializeField]
+    private StaminaManager _stamina;
+
     [SerializeField]
     private float _proceedLag;
 
@@ -36,6 +40,7 @@ public class GameStateManager : MonoBehaviour
     {
         _mover.Initialize(_wheat, _skyline);
         _wheat.GameReset();
+        _stamina.OnGameReset();
         NextDay(0);
     }
 
@@ -69,7 +74,14 @@ public class GameStateManager : MonoBehaviour
     void CalculateExposure(float percent)
     {
         float exposure = percent / _skyline.activeSkyline.percentShadedArea;
-        Debug.Log("Percent shaded in view: " + percent + " Exposure: " + exposure);
+        RefundStamina(exposure);
+    }
+
+    void RefundStamina(float exposure)
+    {
+        float coverage = 1 - exposure;
+        coverage = Mathf.Clamp(coverage, 0f, 1f);
+        _stamina.RefundStamina(coverage);
     }
 
     void ResumeGameplay()
