@@ -18,8 +18,8 @@ public class GameSettingsSO : ScriptableObject
     public float highlightGlowRate => _highlightGlowRate;
 
     [SerializeField]
-    private float _wheatScalar;
-    public float wheatScalar => _wheatScalar;
+    private float _wheatTotal;
+    public float wheatTotal => _wheatTotal;
 
     [SerializeField]
     private float _maxWheat;

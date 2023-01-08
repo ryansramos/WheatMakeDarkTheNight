@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4094183880706140399}
   - component: {fileID: 4094183880706140397}
   - component: {fileID: 483924600}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WheatStalk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -101,11 +101,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settings: {fileID: 11400000, guid: 57a44a54fe9515a4592748b0563ca01a, type: 2}
   _onClickEvent: {fileID: 11400000, guid: ea124799780b998409296ecdc86011c5, type: 2}
-  _onWheatCutEvent: {fileID: 11400000, guid: 495c516445847524d9f48e6f56893f26, type: 2}
   RequestSetActive:
     m_PersistentCalls:
       m_Calls: []
   RequestDeactivate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWheatCut:
     m_PersistentCalls:
       m_Calls: []
 --- !u!61 &483924600
@@ -145,7 +147,7 @@ GameObject:
   - component: {fileID: 5649620376482892939}
   - component: {fileID: 1809456119814092107}
   - component: {fileID: 4094183880767484573}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Highlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +189,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -7,6 +7,7 @@ public class SkylineManager : MonoBehaviour
     [SerializeField]
     private SkylineData[] _skylines;
     private SkylineData _activeSkyline = default;
+    public SkylineData activeSkyline => _activeSkyline;
 
     private SpriteRenderer _renderer;
 

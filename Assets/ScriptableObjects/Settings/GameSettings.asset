@@ -15,5 +15,5 @@ MonoBehaviour:
   _maxWheatHeight: 5
   _highlightWidth: 0.2
   _highlightGlowRate: 2.3
-  _wheatScalar: 10
+  _wheatTotal: 90
   _maxWheat: 315

@@ -30,7 +30,40 @@ public class WheatManager : MonoBehaviour
         {
             stalk.OnReset();
         }
+    }
+
+    public void GameReset()
+    {
+        Reset();
         _meter.Reset();
+    }
+
+    public void Pause()
+    {
+        _activeStalk = null;
+        foreach (WheatStalk stalk in _stalks)
+        {
+            stalk.SetActive(false);
+            stalk.Pause();
+        }
+    }
+
+    public void Resume()
+    {
+        foreach (WheatStalk stalk in _stalks)
+        {
+            stalk.Resume();
+        }
+    }
+
+    public float[] GetStalkHeights()
+    {
+        float[] heights = new float[_stalks.Length];
+        for (int i = 0; i < heights.Length; i++)
+        {
+            heights[i] = _stalks[i].currentHeight;
+        }
+        return heights;
     }
 
     void OnRequestSetActive(WheatStalk stalk)
