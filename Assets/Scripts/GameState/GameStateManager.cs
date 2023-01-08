@@ -103,7 +103,12 @@ public class GameStateManager : MonoBehaviour
 
     [SerializeField]
     private TextBlock[] _gameOverFeedbackMessage;
+#if UNITY_EDITOR
 
+    [SerializeField]
+    private int _startDay;
+
+#endif
     void Start()
     {
        ResetGame();
@@ -116,8 +121,10 @@ public class GameStateManager : MonoBehaviour
         _resetButton.gameObject.SetActive(false);
         _nightLight.gameObject.SetActive(false);
         _nightScreen.gameObject.SetActive(false);
-        _day++;
         _day = 0;
+#if UNITY_EDITOR
+        _day = _startDay;
+#endif
         _mover.Initialize(_wheat, _skyline);
         _wheat.GameReset();
         _stamina.OnGameReset();

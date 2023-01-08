@@ -36,6 +36,11 @@ public class StaminaManager : MonoBehaviour
         _onWheatCutEvent.OnEventRaised += OnWheatCut;
     }
 
+    void OnDisable()
+    {
+        _onWheatCutEvent.OnEventRaised -= OnWheatCut;
+    }
+
     public void OnGameReset()
     {
         _currentStamina = _settings.maxStamina;
