@@ -6,6 +6,10 @@ public class SkylineManager : MonoBehaviour
 {
     [SerializeField]
     private SkylineData[] _skylines;
+
+    [SerializeField]
+    private GameSettingsSO _settings;
+
     private SkylineData _activeSkyline = default;
     public SkylineData activeSkyline => _activeSkyline;
 
@@ -35,6 +39,17 @@ public class SkylineManager : MonoBehaviour
                 break;
         }
         return output;
+    }
+
+    [ContextMenu("Calculate total wheat")]
+    private void CalculateTotalWheat()
+    {
+        float output = 0;
+        foreach (SkylineData skyline in _skylines)
+        {
+            output += skyline.MaxWheat();
+        }
+        Debug.Log("Max wheat = " + output * _settings.expectedEfficiency);
     }
 
     void SetSprite(Sprite sprite)

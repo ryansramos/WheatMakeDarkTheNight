@@ -16,8 +16,8 @@ MonoBehaviour:
   _highlightWidth: 0.2
   _highlightGlowRate: 2.3
   _wheatTotal: 90
-  _expectedEfficiency: 0.85
-  _maxWheat: 315
+  _expectedEfficiency: 0.75
+  _maxWheat: 282
   _maxStamina: 35
   _staminaPerHit: 1
   _blockTier1: 0.9
