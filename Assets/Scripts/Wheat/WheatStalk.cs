@@ -9,10 +9,6 @@ public class WheatStalk : MonoBehaviour
     [SerializeField]
     private GameSettingsSO _settings;
 
-    [Header("Listening on: ")]
-    [SerializeField]
-    private Vector3EventChannel _onClickEvent;
-
     public UnityEvent<WheatStalk> RequestSetActive;
     public UnityEvent<WheatStalk> RequestDeactivate;
     public UnityEvent<float> OnWheatCut;
@@ -31,16 +27,6 @@ public class WheatStalk : MonoBehaviour
         _transform = gameObject.GetComponent<Transform>();
         _renderer = gameObject.GetComponent<SpriteRenderer>();
         _highlight = gameObject.GetComponentInChildren<WheatHighlight>();
-    }
-
-    void OnEnable()
-    {
-        _onClickEvent.OnEventRaised += OnClick;
-    }
-
-    void OnDisable()
-    {
-        _onClickEvent.OnEventRaised -= OnClick;
     }
 
     void Start()

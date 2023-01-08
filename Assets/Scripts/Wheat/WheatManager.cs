@@ -11,7 +11,23 @@ public class WheatManager : MonoBehaviour
     private WheatMeter _meter;
 
     [SerializeField]
+    private StaminaManager _stamina;
+
+    [SerializeField]
+    private Vector3EventChannel _onClickEvent;
+
+    [SerializeField]
     private VoidEventChannelSO _onWheatCutEvent;
+
+    void OnEnable()
+    {
+        _onClickEvent.OnEventRaised += OnClick;
+    }
+
+    void OnDisable()
+    {
+        _onClickEvent.OnEventRaised -= OnClick;
+    }
 
     void Start()
     {
@@ -22,6 +38,18 @@ public class WheatManager : MonoBehaviour
             stalk.OnWheatCut.AddListener(OnWheatCut);
         }
         Reset();
+    }
+
+    void OnClick(Vector3 position)
+    {
+        if (_stamina.isDepleted)
+        {
+            return;
+        }
+        if (_activeStalk != null)
+        {
+            _activeStalk.OnClick(position);
+        }
     }
 
     public void Reset()
