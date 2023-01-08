@@ -22,6 +22,10 @@ public class GameSettingsSO : ScriptableObject
     public float wheatTotal => _wheatTotal;
 
     [SerializeField]
+    private float _expectedEfficiency;
+    public float expectedEfficiency => _expectedEfficiency;
+
+    [SerializeField]
     private float _maxWheat;
     public float maxWheat => _maxWheat;
 
