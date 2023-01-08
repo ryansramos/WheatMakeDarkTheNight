@@ -46,6 +46,12 @@ public class GameStateManager : MonoBehaviour
     private float _feedbackDisplayTime;
 
     [SerializeField]
+    private float _harvestFeedbackLag;
+
+    [SerializeField]
+    private float _harvestFeedbackDisplayTime;
+
+    [SerializeField]
     private float _lightTurnOnLag;
 
     [SerializeField]
@@ -73,6 +79,13 @@ public class GameStateManager : MonoBehaviour
     private int _day = 0;
     
     private bool _isWaitingToProceed;
+
+    [SerializeField]
+    public WheatMeter _wheatMeter;
+
+    [SerializeField]
+    public WheatTarget _target;
+
 
     void Start()
     {
@@ -114,6 +127,13 @@ public class GameStateManager : MonoBehaviour
     {
         _wheat.Reset();
         _skyline.LoadSkyline(day);
+        SetTargetWheat(day);
+    }
+
+    void SetTargetWheat(int day)
+    {
+        float target = _skyline.GetDailyTarget(day);
+        _target.SetTarget(target);
     }
 
     float CalculateCoverage(float percent)
@@ -140,6 +160,19 @@ public class GameStateManager : MonoBehaviour
     void StopCoverageFeedback()
     {
         _feedback.StopFeedbackText();
+    }
+
+    void PlayHarvestFeedback()
+    {
+        float current = _wheatMeter.currentWheat;
+        float expected = _target.targetWheat;
+        float differential = current - expected;
+        _feedback.PlayHarvestText(differential);
+    }
+
+    void StopharvestFeedback()
+    {
+        _feedback.StopHarvestText();
     }
 
     void SetNightLightColor(float coverage)
@@ -213,6 +246,11 @@ public class GameStateManager : MonoBehaviour
         RefundStamina(coverage);
         yield return new WaitForSeconds(_feedbackDisplayTime);
         StopCoverageFeedback();
+        yield return new WaitForSeconds(_harvestFeedbackLag);
+        PlayHarvestFeedback();
+        yield return new WaitForSeconds(_harvestFeedbackDisplayTime);
+        StopharvestFeedback();
+
 
         // remember, fader is swapped fade in/fade out bc i stupid
         _dayCard.gameObject.SetActive(true);

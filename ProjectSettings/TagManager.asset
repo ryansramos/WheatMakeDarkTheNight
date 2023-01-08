@@ -50,11 +50,17 @@ TagManager:
   - name: TextPopup
     uniqueID: 3232561247
     locked: 0
+  - name: Meter
+    uniqueID: 678100891
+    locked: 0
   - name: MeterFill
     uniqueID: 1656827891
     locked: 0
   - name: MeterMask
     uniqueID: 1464973503
+    locked: 0
+  - name: Slider
+    uniqueID: 4021819235
     locked: 0
   - name: Reticle
     uniqueID: 1224714249

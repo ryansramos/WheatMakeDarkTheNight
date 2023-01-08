@@ -25,6 +25,18 @@ public class SkylineManager : MonoBehaviour
         }
     }
 
+    public float GetDailyTarget(int index)
+    {
+        float output = 0f;
+        for (int i = 0; i < index + 1; i++)
+        {
+            output += _skylines[i].MaxWheat();
+            if (i >= _skylines.Length)
+                break;
+        }
+        return output;
+    }
+
     void SetSprite(Sprite sprite)
     {
         _renderer.sprite = sprite;

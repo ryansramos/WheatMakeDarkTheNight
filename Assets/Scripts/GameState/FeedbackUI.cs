@@ -12,10 +12,16 @@ public class FeedbackUI : MonoBehaviour
     private TextMeshProUGUI _feedbackText;
 
     [SerializeField]
+    private TextMeshProUGUI _harvestText;
+
+    [SerializeField]
     private GameSettingsSO _settings;
 
     [SerializeField]
     private TextBlock[] _feedback;
+
+    [SerializeField]
+    private TextBlock[] _harvestFeedback;
 
     public void OnReset()
     {
@@ -69,5 +75,32 @@ public class FeedbackUI : MonoBehaviour
     void SetFeedbackText(int tier)
     {
         _feedbackText.text = _feedback[tier].text;
+    }
+
+    public void PlayHarvestText(float differential)
+    {
+        _harvestText.gameObject.SetActive(true);
+        if (differential < 0f)
+        {
+            SetHarvestText(0);
+        }
+        else if (differential == 0f)
+        {
+            SetHarvestText(1);
+        }
+        else if (differential > 0f)
+        {
+            SetHarvestText(2);
+        }
+    }
+
+    public void StopHarvestText()
+    {
+        _harvestText.gameObject.SetActive(false);
+    }
+
+    void SetHarvestText(int index)
+    {
+        _harvestText.text = _harvestFeedback[index].text;
     }
 }
