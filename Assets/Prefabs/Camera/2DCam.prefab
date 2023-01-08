@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3230799064553025816}
-  - component: {fileID: 3230799064553025817}
   - component: {fileID: 3230799064553025822}
   - component: {fileID: 3230799064553025823}
   - component: {fileID: 3230799064553025820}
@@ -35,14 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!81 &3230799064553025817
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3230799064553025821}
-  m_Enabled: 1
 --- !u!20 &3230799064553025822
 Camera:
   m_ObjectHideFlags: 0
@@ -134,7 +125,7 @@ MonoBehaviour:
   m_ComponentVersion: 1
   m_AssetsPPU: 16
   m_RefResolutionX: 340
-  m_RefResolutionY: 180
+  m_RefResolutionY: 240
   m_CropFrame: 4
   m_GridSnapping: 1
   m_UpscaleRT: 0
